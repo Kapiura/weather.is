@@ -1,5 +1,115 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Weather</h1>
+<h1 style="float:left;">Weather</h1>
+<h1 style="float:right;">
+<script>
+    var today = new Date();
+    var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+</script>    {{c_date.date}}
+</h1>
+<div style="clear:both;" class="con">
+    {% for c in cities %}
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-8 first">
+                            {% for ci in city %}
+                                {% if ci.city_id == c.id %}
+                                    <div class="container-fluid">
+                                        <a href='{{c.name}}'>
+                                            <div class="box">
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <img src='https://openweathermap.org/img/wn/{{ci.pic}}@2x.png' style="float:left;" alt="łot">
+                                                        <h6 style="margin-left: 20px;margin-top: 20px;float: left;">{{c.name}}</h6>
+                                                        <p style="margin-left: 40px;clear:both;float: left;">{{ci.description_simple}}</p>
+                                                        <p class='hid' style="margin-top:-15px;margin-left: 40px;clear:both;float: left; margin-right: 20px;"> {{ci.description}}</p>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div style="float:right;text-align: right;display: table;flex-wrap:wrap;">
+                                                            <div style="margin-right: 28px;">
+                                                                Air pollution: {{ci.air_pol}}
+                                                            </div>
+                                                            <div>
+                                                                Temperature: {{ci.temp}}°C
+                                                            </div>
+                                                            <div style="margin-right: -3px;" class="hid">
+                                                                Wind speed: {{ci.wind_speed}}m/s
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                
+                    </div>
+                    <div class="col-md-4 sec">
+                        <table class="hid" style="justify-content: center;">
+                            <thead>
+                                <tr>
+                                    <th>so2</th>
+                                    <th>no</th>
+                                    <th>no2</th>
+                                    <th>o3</th>
+                                    <th>pm25</th>
+                                    <th>pm10</th>
+                                    <th>co</th>
+                                    <th>nh3</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>{{ci.so2}}</td>
+                                    <td>{{ci.no}}</td>
+                                    <td>{{ci.no2}}</td>
+                                    <td>{{ci.o3}}</td>
+                                    <td>{{ci.pm25}}</td>
+                                    <td>{{ci.pm10}}</td>
+                                    <td>{{ci.co}}</td>
+                                    <td>{{ci.nh3}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+    {% endfor %}
+</div>
 {% endblock %}
+
+<!--
+
+    
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <img src='https://openweathermap.org/img/wn/link@2x.png' style="float:left;"
+                                                alt="łot">
+                                            <h6 style="margin-left: 20px;margin-top: 20px;float: left;">name</h6>
+                                            <p style="margin-left: 40px;clear:both;float: left;">f</p>
+                                            <p class='hid'
+                                                style="margin-top:-15px;margin-left: 40px;clear:both;float: left; margin-right: 20px;">
+                                                desc</p>
+                                        </div>
+                                        <div class="col-md-4" style="margin-top: 1rem;">
+                                            table
+                                        </div>
+                                        <div class="col-md-4">
+                                            <h6 style="margin-top:20px;margin-right: 20px;text-align: right;">Air pollution:
+                                                airpol</h6>
+                                            <p style="text-align: right;margin-right: 40px;float: right; margin-right: 20px;">
+                                                Temperature: tempC</p>
+                                            <p class="hid bez"
+                                                style="text-align: right;margin-right: 40px;clear:both; margin-right: 20px;">
+                                                Wind speed: speedwind m/s</p>
+                                        </div>
+                                    </div>
+                                </div>
+                    </div>
+                </div>
+            </a>
+    
+-->

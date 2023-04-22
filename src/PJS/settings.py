@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     #third 
 
     #own
+    'cities',
+    'holidays',
 ]
 
 MIDDLEWARE = [
