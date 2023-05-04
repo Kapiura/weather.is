@@ -1,5 +1,9 @@
 import datetime as dt
 import requests,os,sys
+import matplotlib.pyplot as plt
+
+import standalone
+standalone.run('PJS.settings')
 
 import django
 django.setup()
@@ -46,6 +50,14 @@ class Weather:
 city.objects.all().delete()
 print("objects deleted")
 
+#create directoeis in graphs named by cities_ lsit
+#for c in cities_:
+#    c = c.replace(" ", "_")
+#    try:
+#        os.system('mkdir graphs/{}'.format(c))
+#        print('created directory {}'.format(c))
+#    except:
+#        print('cannot create {} directory'.format(c))  
 
 
 
@@ -86,13 +98,209 @@ for c in cities_:
     air_pol = weather.get_air_pollution_info()
     my_model.air_pol = air_pol[0]
     my_model.co = air_pol[1]
+    c = c.replace(" ","_")
+    with open('graphs/{}/co.txt'.format(c), "a") as f:
+        f.write('{} {}\n'.format(current_date,air_pol[1]))
+    old_graph_path = "co.png"
+
+    # If the old PNG file exists, delete it
+    if os.path.exists(old_graph_path):
+        os.remove(old_graph_path)
+
+    # Read x and y data from the file
+    x = []
+    y = []
+    with open('graphs/{}/co.txt'.format(c), 'r') as f:
+        for line in f:
+            parts = line.split()
+            if len(parts) == 2:
+                x.append(parts[0])
+                y.append(float(parts[1]))
+    # Generate a new graph using Matplotlib
+    plt.xticks([])
+    plt.plot(x, y)
+    plt.xlabel('date')
+    plt.ylabel('co')
+    plt.title('{} co graph'.format(c))
+    plt.savefig("graphs/{}/co.png".format(c))
+    plt.close()
+
     my_model.no = air_pol[2]
+    with open('graphs/{}/no.txt'.format(c), "a") as f:
+        f.write('{} {}\n'.format(current_date,air_pol[2]))
+    old_graph_path = "no.png"
+
+    # If the old PNG file exists, delete it
+    if os.path.exists(old_graph_path):
+        os.remove(old_graph_path)
+
+    # Read x and y data from the file
+    x = []
+    y = []
+    with open('graphs/{}/no.txt'.format(c), 'r') as f:
+        for line in f:
+            parts = line.split()
+            if len(parts) == 2:
+                x.append(parts[0])
+                y.append(float(parts[1]))
+    # Generate a new graph using Matplotlib
+    plt.plot(x, y)
+    plt.xlabel('date')
+    plt.ylabel('no')
+    plt.title('{} no graph'.format(c))
+    plt.savefig("graphs/{}/no.png".format(c))
+    plt.close()
+
     my_model.no2 = air_pol[3]
+    with open('graphs/{}/no2.txt'.format(c), "a") as f:
+        f.write('{} {}\n'.format(current_date,air_pol[3]))
+    old_graph_path = "no2.png"
+
+    # If the old PNG file exists, delete it
+    if os.path.exists(old_graph_path):
+        os.remove(old_graph_path)
+
+    # Read x and y data from the file
+    x = []
+    y = []
+    with open('graphs/{}/no2.txt'.format(c), 'r') as f:
+        for line in f:
+            parts = line.split()
+            if len(parts) == 2:
+                x.append(parts[0])
+                y.append(float(parts[1]))
+    # Generate a new graph using Matplotlib
+    plt.plot(x, y)
+    plt.xlabel('date')
+    plt.ylabel('no2')
+    plt.title('{} no2 graph'.format(c))
+    plt.savefig("graphs/{}/no2.png".format(c))
+    plt.close()
     my_model.o3 = air_pol[4]
+    with open('graphs/{}/o3.txt'.format(c), "a") as f:
+        f.write('{} {}\n'.format(current_date,air_pol[4]))
+    old_graph_path = "o3.png"
+
+    # If the old PNG file exists, delete it
+    if os.path.exists(old_graph_path):
+        os.remove(old_graph_path)
+
+    # Read x and y data from the file
+    x = []
+    y = []
+    with open('graphs/{}/o3.txt'.format(c), 'r') as f:
+        for line in f:
+            parts = line.split()
+            if len(parts) == 2:
+                x.append(parts[0])
+                y.append(float(parts[1]))
+    # Generate a new graph using Matplotlib
+    plt.plot(x, y)
+    plt.xlabel('date')
+    plt.ylabel('o3')
+    plt.title('{} o3 graph'.format(c))
+    plt.savefig("graphs/{}/o3.png".format(c))
+    plt.close()
     my_model.so2 = air_pol[5]
+    with open('graphs/{}/so2.txt'.format(c), "a") as f:
+        f.write('{} {}\n'.format(current_date,air_pol[5]))
+    old_graph_path = "so2.png"
+
+    # If the old PNG file exists, delete it
+    if os.path.exists(old_graph_path):
+        os.remove(old_graph_path)
+
+    # Read x and y data from the file
+    x = []
+    y = []
+    with open('graphs/{}/so2.txt'.format(c), 'r') as f:
+        for line in f:
+            parts = line.split()
+            if len(parts) == 2:
+                x.append(parts[0])
+                y.append(float(parts[1]))
+    # Generate a new graph using Matplotlib
+    plt.plot(x, y)
+    plt.xlabel('date')
+    plt.ylabel('so2')
+    plt.title('{} so2 graph'.format(c))
+    plt.savefig("graphs/{}/so2.png".format(c))
+    plt.close()
     my_model.pm25 = air_pol[6]
+    with open('graphs/{}/pm25.txt'.format(c), "a") as f:
+        f.write('{} {}\n'.format(current_date,air_pol[6]))
+    old_graph_path = "pm25.png"
+
+    # If the old PNG file exists, delete it
+    if os.path.exists(old_graph_path):
+        os.remove(old_graph_path)
+
+    # Read x and y data from the file
+    x = []
+    y = []
+    with open('graphs/{}/pm25.txt'.format(c), 'r') as f:
+        for line in f:
+            parts = line.split()
+            if len(parts) == 2:
+                x.append(parts[0])
+                y.append(float(parts[1]))
+    # Generate a new graph using Matplotlib
+    plt.plot(x, y)
+    plt.xlabel('date')
+    plt.ylabel('pm25')
+    plt.title('{} pm2_5 graph'.format(c))
+    plt.savefig("graphs/{}/pm25.png".format(c))
+    plt.close()
     my_model.pm10 = air_pol[7]
+    with open('graphs/{}/pm10.txt'.format(c), "a") as f:
+        f.write('{} {}\n'.format(current_date,air_pol[7]))
+    old_graph_path = "pm10.png"
+
+    # If the old PNG file exists, delete it
+    if os.path.exists(old_graph_path):
+        os.remove(old_graph_path)
+
+    # Read x and y data from the file
+    x = []
+    y = []
+    with open('graphs/{}/pm10.txt'.format(c), 'r') as f:
+        for line in f:
+            parts = line.split()
+            if len(parts) == 2:
+                x.append(parts[0])
+                y.append(float(parts[1]))
+    # Generate a new graph using Matplotlib
+    plt.plot(x, y)
+    plt.xlabel('date')
+    plt.ylabel('pm10')
+    plt.title('{} pm10 graph'.format(c))
+    plt.savefig("graphs/{}/pm10.png".format(c))
+    plt.close()
     my_model.nh3 = air_pol[8]
+    with open('graphs/{}/nh3.txt'.format(c), "a") as f:
+        f.write('{} {}\n'.format(current_date,air_pol[8]))
+    old_graph_path = "nh3.png"
+
+    # If the old PNG file exists, delete it
+    if os.path.exists(old_graph_path):
+        os.remove(old_graph_path)
+
+    # Read x and y data from the file
+    x = []
+    y = []
+    with open('graphs/{}/nh3.txt'.format(c), 'r') as f:
+        for line in f:
+            parts = line.split()
+            if len(parts) == 2:
+                x.append(parts[0])
+                y.append(float(parts[1]))
+    # Generate a new graph using Matplotlib
+    plt.plot(x, y)
+    plt.xlabel('date')
+    plt.ylabel('nh3')
+    plt.title('{} nh3 graph'.format(c))
+    plt.savefig("graphs/{}/nh3.png".format(c))
+    plt.close()
     #get temp
     my_model.temp = weather.get_temp()
     #get date
@@ -101,6 +309,7 @@ for c in cities_:
     id_ +=1
     #save object
     my_model.save()
+    #add this 
     print('added')
 
 print('enjoy')
@@ -108,3 +317,7 @@ print('enjoy')
 #pressure
 #rain naprwaic
 #dodac ikonki dnia i nocy 
+
+# Define the path to the old PNG file
+
+
