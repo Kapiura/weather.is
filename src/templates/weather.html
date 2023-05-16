@@ -18,7 +18,7 @@
                 {% if ci.city_id == c.id %}
                 <div class="container-fluid">
                     <div class="box">
-                        <a href='{{c.name}}'>
+                        <a href='{{ci.city_id}}'>
                             <div class="row">
                                 <div class="col-md-6">
                                     <img src='https://openweathermap.org/img/wn/{{ci.pic}}@2x.png' style="float:left;"
@@ -46,7 +46,6 @@
                         </a>
                     </div>
                 </div>
-
                 {% endif %}
                 {% endfor %}
             </div>
@@ -55,4 +54,5 @@
     </div>
     {% endfor %}
 </div>
+
 {% endblock %}
