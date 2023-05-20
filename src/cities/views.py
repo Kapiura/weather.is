@@ -8,6 +8,14 @@ def weather_view(request, *args, **kwargs):
     cities_ = cities.objects.all()
     city_ = city.objects.all()
     ci_date = city.objects.get(city_id=1)
+    #hour current for europe warsaw
+    now = datetime.now(pytz.timezone('Europe/Warsaw')).strftime("%H")
+    if int(now) >= 6 and int(now) < 20:
+        for c in city_:
+            c.pic = c.pic.replace("n","d")
+    else:
+        for c in city_:
+            c.pic = c.pic.replace("d","n")
     context = {
         'cities': cities_,
         'city': city_,
@@ -29,7 +37,7 @@ def weather_view_detail(request,pk):
     sunset = datetime.utcfromtimestamp(sunset)
     sunset = sunset.strftime("%H:%M")
 
-
+    
 
     context = {
         'city': city_,

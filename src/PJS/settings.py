@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'cities',
     'holidays',
     'horoscope',
+    'pages',
     'swieta',
 
 ]

@@ -2,10 +2,9 @@ from django.shortcuts import render
 import abalin_nameday
 import json
 import datetime
-from cities.models import cities, city
+from cities.models import city
 from holidays.models import Shopping_sundays
 from datetime import date
-from workalendar.europe import Poland
 from swieta.models import swieta
 from horoscope.models import horoscope
 
@@ -21,7 +20,7 @@ def home_view(request, *args, **kwargs):
     #get str like monday, tuesday etc
     day_name = date.today().strftime("%A")
     year = date.today().strftime("%Y")
-    #mont but name like may
+    #monht but name like may
     month = date.today().strftime("%B")
     week = date.today().strftime("%W")
     city_ = city.objects.get(city_id=1)
@@ -55,6 +54,17 @@ def home_view(request, *args, **kwargs):
             hdate = now
             hdesc = "No holiday today"
     
+    # Get the current date
+    current_date = datetime.date.today()
+
+    # Calculate the differences between current date and holiday dates
+    differences = [(holiday - current_date).days for holiday in holiday_dates]
+
+    # Find the minimum non-negative difference
+    nearest_holiday = min(d for d in differences if d >= 0)
+
+    print("Days until the nearest holiday:", nearest_holiday)
+
 
     context = {
         'today': day_name,
@@ -78,6 +88,7 @@ def weather_view(request, *args, **kwargs):
     return render(request, "weather.html", context)
 
 def about_me_view(request, *args, **kwargs):
+    img = ''
     context = {
 
     }
