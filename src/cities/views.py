@@ -19,18 +19,17 @@ def weather_view_detail(request,pk):
     city_ = city.objects.get(city_id=pk)
     city_name = cities.objects.get(id=pk)
     city_name_n = city_name.name.replace(" ","_")
-    #path = ''.join('graphs/',city_name.name,'/co.png')
-    gmt = pytz.timezone('GMT')
+
     timezone = int(city_.timezone) // 3600
     timezone = f"UTC {('+' if timezone >= 0 else '')}{timezone}"
     sunset = city_.sunset
     sunrise = city_.sunrise
-
     sunrise = datetime.utcfromtimestamp(sunrise)
-    sunrise = sunrise.strftime("%H:%M") + f" {timezone}"
-
+    sunrise = sunrise.strftime("%H:%M")
     sunset = datetime.utcfromtimestamp(sunset)
-    sunset = sunset.strftime("%H:%M") + f" {timezone}"
+    sunset = sunset.strftime("%H:%M")
+
+
 
     context = {
         'city': city_,
@@ -39,6 +38,7 @@ def weather_view_detail(request,pk):
         'timezone': timezone,
         'sunrise': sunrise,
         'sunset': sunset,
+
     }
     if city_ is not None:
         return render(request, 'detail.html', context)

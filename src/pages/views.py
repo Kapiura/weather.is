@@ -6,7 +6,9 @@ from cities.models import cities, city
 from holidays.models import Shopping_sundays
 from datetime import date
 from workalendar.europe import Poland
+from swieta.models import swieta
 from horoscope.models import horoscope
+
 
 
 def home_view(request, *args, **kwargs):
@@ -36,6 +38,24 @@ def home_view(request, *args, **kwargs):
         sunday = False
 
     horoscope_ = horoscope.objects.all()
+
+    holi = swieta.objects.all()
+   
+    now  = datetime.datetime.now()
+    now = str(now.strftime("%Y-%m-%d"))
+
+    for h in holi:
+        if h.date == now:
+            status_sw = True
+            hdate = h.date
+            hdesc = h.descritpion
+            break
+        else:
+            status_sw = False
+            hdate = now
+            hdesc = "No holiday today"
+    
+
     context = {
         'today': day_name,
         'imieniny': pl_names,
@@ -45,7 +65,9 @@ def home_view(request, *args, **kwargs):
         'timezone': timezone,
         'sunday': sunday,
         'horoscope': horoscope_,
-
+        'hdate': hdate,
+        'hdesc': hdesc,
+        'status_sw': status_sw,
     }
     return render(request, "home.html", context)
 

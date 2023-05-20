@@ -7,9 +7,15 @@
 <h1>
   Nameday: {{imieniny}}
 </h1>
-<h1>
-  Holiday: {{swieto}}
-</h1>
+
+{% if status_sw %}
+  <h1>Today is a holiday</h1>
+  <h1>{{hdate}}: {{hdesc}}</h1>
+  {% else %}
+  <h1>Today is not a holiday</h1>
+{% endif %}
+
+
 <h1>
   Week: {{week}}
 </h1>
