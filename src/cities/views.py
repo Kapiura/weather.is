@@ -2,6 +2,7 @@ from django.shortcuts import render
 from .models import cities, city
 from django.http import Http404
 from datetime import datetime
+import pytz
 
 def weather_view(request, *args, **kwargs):
     cities_ = cities.objects.all()
@@ -19,11 +20,18 @@ def weather_view_detail(request,pk):
     city_name = cities.objects.get(id=pk)
     city_name_n = city_name.name.replace(" ","_")
     #path = ''.join('graphs/',city_name.name,'/co.png')
-    timezone = city_.timezone
+    gmt = pytz.timezone('GMT')
+    timezone = int(city_.timezone) // 3600
+    timezone = f"UTC {('+' if timezone >= 0 else '')}{timezone}"
     sunset = city_.sunset
     sunrise = city_.sunrise
-    sunrise = datetime.utcfromtimestamp(sunrise).strftime('%H:%M')
-    sunset = datetime.utcfromtimestamp(sunset).strftime('%H:%M')
+
+    sunrise = datetime.utcfromtimestamp(sunrise)
+    sunrise = sunrise.strftime("%H:%M") + f" {timezone}"
+
+    sunset = datetime.utcfromtimestamp(sunset)
+    sunset = sunset.strftime("%H:%M") + f" {timezone}"
+
     context = {
         'city': city_,
         'name_space': city_name.name,

@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container-fluid">
+  <h1>
+    {{imieniny}}
+  </h1>
+    <div class="row">
+      <div style="padding-top: 3em;text-align: center;" class="col-md-12">
+        <h1>Welcome to <code> What's the weather</code> </h1>
+        <p>This website informs you about air pollution in provincial cities of Poland.</p>
+      </div>
+    </div>
+    <div style="padding-top: 5em;" class="row">
+      <div class="col-md-4">
+        <h2>How is it working?</h2>
+        <p>My website app is getting information from <code>OpenWeather API</code>. Info is about: air pollution, weather, wind, precipitation.</p>
+      </div>
+      <div class="col-md-4">
+        <h2>More</h2>
+        <p>I will add to my website more addons like display name-day, poupular world special days like Children's Day, birthdays of famous polish people and <i>shopping</i> Sunday.</p>
+      </div>
+      <div class="col-md-4">
+        <h2>Technologies i used</h2>
+        <p>To make this project, I used: Django (Python framework), HTML, CSS, JavaScript, Bootstrap (CSS framework), Python.</p>
+      </div>
+    </div>
+  </div>
+{% endblock %}

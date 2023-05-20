@@ -22,11 +22,8 @@ class city(models.Model):
     pic = models.CharField(default='', max_length=150)
     wind_speed = models.FloatField(default=0)
     clouds = models.CharField(default='',max_length=150)
-    rain = models.FloatField()
     sunrise = models.IntegerField(default=0)
     sunset = models.IntegerField(default=0)
     timezone = models.IntegerField(default=0)
     #s
     humidity = models.FloatField(default=0)
-    sea_level = models.IntegerField(default=0)
-    grnd_level = models.IntegerField(default=0)

@@ -3,7 +3,7 @@
 {% block content %}
 <h1>{{name_space}}</h1>
 <p>Data: {{city.date}}</p>
-<p>Temperature: {{city.temp}}</p>
+<p>Temperature: {{city.temp}} °C</p>
 <p>Simple weather description: {{city.description_simple}}</p>
 <p>Extended weather description: {{city.description}}</p>
 <p>Air pollution: {{city.air_pol}}</p>
@@ -31,8 +31,8 @@
 </table>
 <img src='https://openweathermap.org/img/wn/{{city.pic}}@2x.png'>
 <p>Wind speed: {{city.wind_speed}}</p>
-<p>Clouds: {{city.clouds}}</p>
-<p>Rain: {{city.rain}}</p>
+<p>Clouds: {{city.clouds}}%</p>
+<p>Humidity: {{city.humidity}}%</p>
 <p>Sunrise: {{sunrise}}</p>
 <p>Sunset: {{sunset}}</p>
 <p>Timezone: {{timezone}}</p>

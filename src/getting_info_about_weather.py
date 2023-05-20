@@ -1,6 +1,10 @@
 import datetime as dt
-import requests,os,sys
+import requests,os
 import matplotlib.pyplot as plt
+import json
+from datetime import date
+from workalendar.europe import Poland
+
 
 import standalone
 standalone.run('PJS.settings')
@@ -8,6 +12,8 @@ standalone.run('PJS.settings')
 import django
 django.setup()
 from cities.models import city
+from horoscope.models import horoscope
+from swieta.models import swieta
 
 current_date = [dt.datetime.now().strftime('%Y'),dt.datetime.now().strftime('%m'),dt.datetime.now().strftime('%d')]
 current_date = '-'.join(current_date)
@@ -79,18 +85,14 @@ for c in cities_:
     #get clouds info
     my_model.clouds = data['clouds']['all']
     #get rain info
-    my_model.rain = data['rain'][0]['1h']
+    #my_model.rain = data['rain']
     #get sunrise and sunset time
     my_model.sunset = data['sys']['sunset']
     my_model.sunrise = data['sys']['sunrise']
     #timezone
     my_model.timezone = data['timezone']
     #humidity
-    my_model.humidity = data['main'][0]['humidity']
-    #sea_level
-    my_model.sea_level = data['main'][0]['sea_level']
-    #grnd_level
-    my_model.grnd_level = data['main'][0]['grnd_level']
+    my_model.humidity = data['main']['humidity']
     #air pollution info
     air_pol = weather.get_air_pollution_info()
     my_model.air_pol = air_pol[0]
@@ -325,4 +327,45 @@ print('enjoy')
 
 # Define the path to the old PNG file
 
+#deleting all objects
+horoscope.objects.all().delete()
+print("objects deleted")  
 
+current = date.today()
+current = current.strftime("%Y-%m-%d")
+
+horoscope_signs = ['Aries', 'Taurus', 'Gemini', 'Cancer', 'Leo', 'Virgo', 'Libra', 'Scorpio', 'Sagittarius', 'Capricorn', 'Pisces', 'Aquarius']
+
+for sign in horoscope_signs:
+    my_model = horoscope()
+    url = f"https://horoscope-app-api.vercel.app/api/v1/get-horoscope/daily?sign={sign}&day={current}"
+    response = requests.get(url)
+    response = response.json()
+    my_model.sign = sign
+    try:
+        horoskopik = response['data']['horoscope_data']
+        print(horoskopik)
+        my_model.description = horoskopik
+    except:
+        pass
+        my_model.description = 'Something went wrong getting horoscope for today from api :('
+        print("Something went wrong getting horoscope for today from api :(")
+    my_model.save()
+
+
+#deleting all objects
+swieta.objects.all().delete()
+print("objects deleted")
+
+
+cal = Poland()
+curretn_year = date.today().year
+
+
+holidays = cal.holidays(curretn_year)
+
+for holiday in holidays:
+    my_model = swieta()
+    my_model.descritpion = holiday[1]
+    my_model.date = holiday[0]
+    my_model.save()
