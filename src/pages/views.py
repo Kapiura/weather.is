@@ -54,16 +54,13 @@ def home_view(request, *args, **kwargs):
             hdate = now
             hdesc = "No holiday today"
     
-    # Get the current date
-    current_date = datetime.date.today()
-
-    # Calculate the differences between current date and holiday dates
-    differences = [(holiday - current_date).days for holiday in holiday_dates]
-
-    # Find the minimum non-negative difference
-    nearest_holiday = min(d for d in differences if d >= 0)
-
-    print("Days until the nearest holiday:", nearest_holiday)
+    ## Get the current date
+    #current_date = datetime.date.today()
+    ## Calculate the differences between current date and holiday dates
+    #differences = [(holiday - current_date).days for holiday in holiday_dates]
+    ## Find the minimum non-negative difference
+    #nearest_holiday = min(d for d in differences if d >= 0)
+    #print("Days until the nearest holiday:", nearest_holiday)
 
 
     context = {

@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-8j%ura5f6p*tezk+kz2fpz(=u%j^02yg@r-28zd&u1_m6h3bm_
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['kapiura.pythonanywhere.com','localhost']
 
 
 # Application definition
