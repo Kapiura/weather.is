@@ -30,7 +30,9 @@
     </tr>
 </table>
 <img src='https://openweathermap.org/img/wn/{{city.pic}}@2x.png'>
-<p>Wind speed: {{city.wind_speed}}</p>
+<p>Wind speed: {{city.wind_speed}} <span class="fraction">m</span>/<span class="fraction">s</span></p>
+
+
 <p>Clouds: {{city.clouds}}%</p>
 <p>Humidity: {{city.humidity}}%</p>
 <p>Sunrise: {{sunrise}}</p>
@@ -38,13 +40,13 @@
 <p>Timezone: {{timezone}}</p>
 
 
-<img src="{% static 'graphs/' %}{{ name }}/co.png" alt="Wykres co">
-<img src="{% static 'graphs/' %}{{ name }}/nh3.png" alt="Wykres">
-<img src="{% static 'graphs/' %}{{ name }}/no.png" alt="Wykres">
-<img src="{% static 'graphs/' %}{{ name }}/no2.png" alt="Wykres">
-<img src="{% static 'graphs/' %}{{ name }}/o3.png" alt="Wykres">
-<img src="{% static 'graphs/' %}{{ name }}/pm10.png" alt="Wykres">
-<img src="{% static 'graphs/' %}{{ name }}/pm25.png" alt="Wykres">
-<img src="{% static 'graphs/' %}{{ name }}/so2.png" alt="Wykres">
+<img src="{% static 'graphs/' %}{{ name }}/co.png" alt="co graph">
+<img src="{% static 'graphs/' %}{{ name }}/nh3.png" alt="nh3 graph">
+<img src="{% static 'graphs/' %}{{ name }}/no.png" alt=" no graph">
+<img src="{% static 'graphs/' %}{{ name }}/no2.png" alt="no2 graph">
+<img src="{% static 'graphs/' %}{{ name }}/o3.png" alt="o3 graph">
+<img src="{% static 'graphs/' %}{{ name }}/pm10.png" alt="pm10 graph">
+<img src="{% static 'graphs/' %}{{ name }}/pm25.png" alt="pm25 graph">
+<img src="{% static 'graphs/' %}{{ name }}/so2.png" alt="so2 graph">
 
 {% endblock %}

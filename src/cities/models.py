@@ -9,7 +9,7 @@ class city(models.Model):
     temp = models.FloatField(default=0)
     description_simple = models.CharField(max_length=300, default='')
     description = models.CharField(max_length=300, default='')
-    air_pol = models.FloatField(default=0)
+    air_pol = models.CharField(max_length=100,default='')
     so2 = models.FloatField()
     no = models.FloatField(default=0)
     no2 = models.FloatField()

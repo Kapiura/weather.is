@@ -15,16 +15,10 @@ try:
 except:
     print("Something gone wrong while deleting objects from 'horoscope'")
 
-# Get today's date
-current = date.today()
-# Transofrm it to format = YY-mm-dd
-current = current.strftime("%Y-%m-%d")
-# List of horoscope signs
+current = date.today().strftime("%Y-%m-%d")
 horoscope_signs = ['Aries', 'Taurus', 'Gemini', 'Cancer', 'Leo', 'Virgo', 'Libra', 'Scorpio', 'Sagittarius', 'Capricorn', 'Pisces', 'Aquarius']
 for sign in horoscope_signs:
-    # Creating an horoscope object
     my_model = horoscope()
-    #get by reqauest daily horoscope for current sign in loop
     url = f"https://horoscope-app-api.vercel.app/api/v1/get-horoscope/daily?sign={sign}&day={current}"
     response = requests.get(url).json()
     my_model.sign = sign

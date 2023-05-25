@@ -10,25 +10,17 @@ from horoscope.models import horoscope
 
 
 def home_view(request, *args, **kwargs):
-    myClient = abalin_nameday.namedayRequestor('pl', 'Europe/Warsaw')
-    data = json.dumps(json.loads(myClient.GetData()), indent=2, sort_keys=True)
-    data = json.loads(data)
-    pl_names = data['namedays']['nameday']['pl']
     today = date.today()
-    today = today.strftime("%Y-%m-%d")
-    #get str like monday, tuesday etc
-    day_name = date.today().strftime("%A")
-    year = date.today().strftime("%Y")
-    #monht but name like may
-    month = date.today().strftime("%B")
-    week = date.today().strftime("%W")
     city_ = city.objects.get(city_id=1)
+
+    myClient = abalin_nameday.namedayRequestor('pl', 'Europe/Warsaw')
+    data = json.loads(json.dumps(json.loads(myClient.GetData()), indent=2, sort_keys=True))
+    pl_names = data['namedays']['nameday']['pl']
+
     timezone = int(city_.timezone) // 3600
     timezone = f"UTC {('+' if timezone >= 0 else '')}{timezone}"
 
-    today = date.today()
-    sunday = today + datetime.timedelta(days=(6 - today.weekday() + 7) % 7)
-    sunday = sunday.strftime("%Y-%m-%d")
+    sunday = (today + datetime.timedelta(days=(6 - today.weekday() + 7) % 7)).strftime("%Y-%m-%d")
     try:
         Shopping_sundays.objects.get(date=sunday)
         sunday = True
@@ -36,21 +28,17 @@ def home_view(request, *args, **kwargs):
         sunday = False
 
     horoscope_ = horoscope.objects.all()
+    holidays_ = Holidays.objects.all()
 
-    holi = Holidays.objects.all()
-   
-    now  = datetime.datetime.now()
-    now = str(now.strftime("%Y-%m-%d"))
-
-    for h in holi:
-        if h.date == now:
+    for h in holidays_:
+        if h.date == str(today.strftime("%Y-%m-%d")):
             holidayStatus = True
             hdate = h.date
             hdesc = h.descritpion
             break
         else:
             holidayStatus = False
-            hdate = now
+            hdate = str(today.strftime("%Y-%m-%d"))
             hdesc = "No holiday today"
     
     ## Get the current date
@@ -63,11 +51,11 @@ def home_view(request, *args, **kwargs):
 
 
     context = {
-        'today': day_name,
+        'today': today.strftime("%d - %A"),
         'imieniny': pl_names,
-        'year': year,
-        'month': month,
-        'week': week,
+        'year': today.strftime("%Y"),
+        'month': today.strftime("%B"),
+        'week': today.strftime("%W"),
         'timezone': timezone,
         'sunday': sunday,
         'horoscope': horoscope_,
@@ -77,16 +65,8 @@ def home_view(request, *args, **kwargs):
     }
     return render(request, "home.html", context)
 
-def weather_view(request, *args, **kwargs):
-    context = {
-
-    }
-    return render(request, "weather.html", context)
-
 def about_me_view(request, *args, **kwargs):
-    img = ''
     context = {
-
     }
     return render(request, "about_me.html", context)
 
@@ -95,9 +75,3 @@ def contact_view(request, *args, **kwargs):
 
     }
     return render(request, "contact.html", context)
-
-def graphs_view(request, *args, **kwargs):
-    context = {
-
-    }
-    return render(request, "graphs.html", context)

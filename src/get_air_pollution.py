@@ -17,7 +17,13 @@ cities_ = ['Bialystok', 'Bydgoszcz', 'Gdansk', 'Gorzow Wielkopolski', 'Katowice'
 API_KEY = '7b7fe4dd87c83d143654327eaa81fdd8'
 air_pol_name = ['co', 'nh3', 'no', 'no2', 'o3', 'pm10', 'pm25', 'so2']
 air_pol_titles = ['Carbon Monoxide', 'Ammonia', 'Nitric Oxide', 'Nitrogen Dioxide', 'Ozone', 'Particulate Matter 10', 'Particulate Matter 2.5', 'Sulfur Dioxide']
-
+air_num = {
+    1:'Good',
+    2:'Fair',
+    3:'Moderate',
+    4:'Poor',
+    5:'Very Poor',
+}
 os.system('clear')
 
 class Weather:
@@ -76,7 +82,7 @@ try:
         my_model.date = current_date
 
         air_pol = weather.get_air_pollution_info()
-        my_model.air_pol = air_pol[0]
+        my_model.air_pol = air_num[air_pol[0]]
         my_model.co = air_pol[1]
         my_model.no = air_pol[2]
         my_model.no2 = air_pol[3]
