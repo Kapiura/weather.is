@@ -8,7 +8,7 @@
   Nameday: {{imieniny}}
 </h1>
 
-{% if status_sw %}
+{% if holidayStatus %}
   <h1>Today is a holiday</h1>
   <h1>{{hdate}}: {{hdesc}}</h1>
   {% else %}
@@ -52,11 +52,11 @@
 Shopping Sunday: {{sunday}}
 </h1>
 <!--horoscope from dictionary-->
-
 {% for key in horoscope %}
   <h6>
     {{key.sign}}: {{key.description}}
   </h6>
 {% endfor %}
+<!--horoscope from dictionary-->
     
 {% endblock %}

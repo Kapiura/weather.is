@@ -3,9 +3,8 @@ import abalin_nameday
 import json
 import datetime
 from cities.models import city
-from holidays.models import Shopping_sundays
+from holidays.models import Shopping_sundays, Holidays
 from datetime import date
-from swieta.models import swieta
 from horoscope.models import horoscope
 
 
@@ -38,19 +37,19 @@ def home_view(request, *args, **kwargs):
 
     horoscope_ = horoscope.objects.all()
 
-    holi = swieta.objects.all()
+    holi = Holidays.objects.all()
    
     now  = datetime.datetime.now()
     now = str(now.strftime("%Y-%m-%d"))
 
     for h in holi:
         if h.date == now:
-            status_sw = True
+            holidayStatus = True
             hdate = h.date
             hdesc = h.descritpion
             break
         else:
-            status_sw = False
+            holidayStatus = False
             hdate = now
             hdesc = "No holiday today"
     
@@ -74,7 +73,7 @@ def home_view(request, *args, **kwargs):
         'horoscope': horoscope_,
         'hdate': hdate,
         'hdesc': hdesc,
-        'status_sw': status_sw,
+        'holidayStatus': holidayStatus,
     }
     return render(request, "home.html", context)
 
