@@ -1,63 +1,45 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>
-  Day: {{today}}
-</h1>
-<h1>
-  Nameday: {{imieniny}}
-</h1>
+<div class="weatherDesc container">
+  <div class="row">
+    <div class="centerDiv weatherTab col-md-5">
+      <p>{{today}} - {{month}} - {{year}}</p>
+      <p>Week number: {{week}}</p>
+      <p><span id="txt"></span> {{timezone}}</p>
+    </div>
+    <div class="centerDiv weatherTab col-md-5">
+      {% if holidayStatus %}
+      <p>Today is a holiday - {{hdesc}}</p>
+      {% else %}
+      <p>Today is not a holiday</p>
+      {% endif %}
+      {% if sunday %}
+      <p>This week is there a Shopping Sunday</p>
+      {% else %}
+      <p>This week is there not a Shopping Sunday</p>
+      {% endif %}
+    </div>
+  </div>
+  <div class="row">
+    <div class="centerDiv weatherTab col-md-11">
+      <h3>They have a name day today:</h3>
+      <p>{{nameday}}</p>
+    </div>
+  </div>
+  <div class="centerDiv weatherTab row">
+    <h3>Choose horoscope sign:</h3>
+    <select id="myCombo" onchange="showSelected()">
+      <option value="">Choose...</option>
+      {% for key in horoscope %}
+      <option value="{{key.sign}}">{{key.sign}}</option>
+      {% endfor %}
+    </select>
 
-{% if holidayStatus %}
-  <h1>Today is a holiday</h1>
-  <h1>{{hdate}}: {{hdesc}}</h1>
-  {% else %}
-  <h1>Today is not a holiday</h1>
-{% endif %}
+    <p class="centerDiv weatherTab horoscope" id="selectedSignInfo">Daily horoscope...</p>
+
+  </div>
+</div>
 
 
-<h1>
-  Week: {{week}}
-</h1>
-<h1>
-  Month: {{month}}
-</h1>
-<h1>
-  Year: {{year}}
-</h1>
-<h1 id="txt">
-<!--javascritp time real time updating over secnod-->
-  <script>
-    function startTime() {
-      var today = new Date();
-      var h = today.getHours();
-      var m = today.getMinutes();
-      var s = today.getSeconds();
-      m = checkTime(m);
-      s = checkTime(s);
-      document.getElementById('txt').innerHTML =
-      "Current time: " + h + ":" + m + ":" + s;
-      var t = setTimeout(startTime, 500);
-    }
-    function checkTime(i) {
-      if (i < 10) {i = "0" + i};
-      return i;
-    }
-  </script>
-<!--javascritp time real time updating over secnod-->
-</h1>
-<h1>
-  Timezone: {{timezone}}
-</h1>
-<h1>
-Shopping Sunday: {{sunday}}
-</h1>
-<!--horoscope from dictionary-->
-{% for key in horoscope %}
-  <h6>
-    {{key.sign}}: {{key.description}}
-  </h6>
-{% endfor %}
-<!--horoscope from dictionary-->
-    
-{% endblock %}
+  {% endblock %}

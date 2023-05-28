@@ -1,5 +1,6 @@
 from datetime import date
 from workalendar.europe import Poland
+from internet_connection_checker import internet
 
 import standalone
 standalone.run('PJS.settings')
@@ -7,6 +8,8 @@ standalone.run('PJS.settings')
 import django
 django.setup()
 from holidays.models import Holidays
+
+internet()
 
 #deleting all obejcts from table 'swieta'
 try:

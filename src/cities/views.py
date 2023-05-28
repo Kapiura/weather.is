@@ -4,18 +4,15 @@ from django.http import Http404
 from datetime import datetime
 import pytz
 
+now = datetime.now(pytz.timezone('Europe/Warsaw')).strftime("%H")
+
 def weather_view(request, *args, **kwargs):
     cities_ = cities.objects.all()
     city_ = city.objects.all()
     ci_date = city.objects.get(city_id=1)
-    #hour current for europe warsaw
-    now = datetime.now(pytz.timezone('Europe/Warsaw')).strftime("%H")
     if int(now) >= 6 and int(now) < 20:
         for c in city_:
             c.pic = c.pic.replace("n","d")
-    else:
-        for c in city_:
-            c.pic = c.pic.replace("d","n")
     context = {
         'cities': cities_,
         'city': city_,
@@ -31,12 +28,11 @@ def weather_view_detail(request,pk):
     timezone = int(city_.timezone) // 3600
     timezone = f"UTC {('+' if timezone >= 0 else '')}{timezone}"
     sunset = city_.sunset
-    sunrise = city_.sunrise
-    sunrise = datetime.utcfromtimestamp(sunrise)
-    sunrise = sunrise.strftime("%H:%M")
+    sunrise = datetime.utcfromtimestamp(city_.sunrise).strftime("%H:%M")
     sunset = datetime.utcfromtimestamp(sunset)
     sunset = sunset.strftime("%H:%M")
-
+    if int(now) >= 6 and int(now) < 20:
+        city_.pic = city_.pic.replace("n","d")
     
 
     context = {

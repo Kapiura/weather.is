@@ -1,5 +1,6 @@
 import requests
 from datetime import date
+from internet_connection_checker import internet
 
 import standalone
 standalone.run('PJS.settings')
@@ -7,6 +8,8 @@ standalone.run('PJS.settings')
 import django
 django.setup()
 from horoscope.models import horoscope
+
+internet()
 
 #deleting all horoscopes to make space for new 
 try:

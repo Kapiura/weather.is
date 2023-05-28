@@ -1,14 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1 style="float:left;">Weather</h1>
-<h1 style="float:right;">
-    <script>
-        var today = new Date();
-        var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-    </script> {{c_date.date}}
-</h1>
-<div style="clear:both;" class="con">
+<div  class="con">
     {% for c in cities %}
     <div class="container-fluid">
         <div class="row">

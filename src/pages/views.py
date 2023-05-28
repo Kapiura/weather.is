@@ -52,7 +52,7 @@ def home_view(request, *args, **kwargs):
 
     context = {
         'today': today.strftime("%d - %A"),
-        'imieniny': pl_names,
+        'nameday': pl_names,
         'year': today.strftime("%Y"),
         'month': today.strftime("%B"),
         'week': today.strftime("%W"),
@@ -74,4 +74,4 @@ def contact_view(request, *args, **kwargs):
     context = {
 
     }
-    return render(request, "contact.html", context)
+    return render(request, "base_home_site.html", context)

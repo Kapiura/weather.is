@@ -1,6 +1,7 @@
 import datetime as dt
 import requests,os
 import matplotlib.pyplot as plt
+from internet_connection_checker import internet
 
 
 import standalone
@@ -10,13 +11,15 @@ import django
 django.setup()
 from cities.models import city
 
+os.system('clear')
+internet()
+
 current_date = [dt.datetime.now().strftime('%Y'),dt.datetime.now().strftime('%m'),dt.datetime.now().strftime('%d')]
 current_date = '-'.join(current_date)
 ap_list = ['co','no','no2','o3','so2','pm2_5','pm10','nh3']
+air_pol_titles = ['Carbon Monoxide','Nitric Oxide','Nitrogen Dioxide','Ozone','Sulfur Dioxide','Particulate Matter 2.5','Particulate Matter 10','Ammonia']
 cities_ = ['Bialystok', 'Bydgoszcz', 'Gdansk', 'Gorzow Wielkopolski', 'Katowice', 'Kielce', 'Krakow', 'Lublin', 'Lodz', 'Olsztyn', 'Opole', 'Poznan', 'Rzeszow', 'Szczecin', 'Torun', 'Warsaw', 'Wroclaw', 'Zielona Gora']
 API_KEY = '7b7fe4dd87c83d143654327eaa81fdd8'
-air_pol_name = ['co', 'nh3', 'no', 'no2', 'o3', 'pm10', 'pm25', 'so2']
-air_pol_titles = ['Carbon Monoxide', 'Ammonia', 'Nitric Oxide', 'Nitrogen Dioxide', 'Ozone', 'Particulate Matter 10', 'Particulate Matter 2.5', 'Sulfur Dioxide']
 air_num = {
     1:'Good',
     2:'Fair',
@@ -24,7 +27,6 @@ air_num = {
     4:'Poor',
     5:'Very Poor',
 }
-os.system('clear')
 
 class Weather:
     def __init__(self, city):
@@ -92,17 +94,19 @@ try:
         my_model.pm10 = air_pol[7]
         my_model.nh3 = air_pol[8]
         air_pol_com = [my_model.co, my_model.no, my_model.no2, my_model.o3, my_model.so2, my_model.pm25, my_model.pm10, my_model.nh3]
+        ap_list = ['co','no','no2','o3','so2','pm2_5','pm10','nh3']
         my_model.save()
         temp_c = c.replace(' ', '_')
         for i in range(len(air_pol_com)):
-            with open(f'cities/static/graphs/{temp_c}/{air_pol_name[i]}.txt', "a") as f:
+            temp = ap_list[i].replace('_','')
+            with open(f'cities/static/graphs/{temp_c}/{temp}.txt', "a") as f:
                     f.write(f'{current_date} {air_pol_com[i]}\n')
-            old_graph_path = f'{air_pol_name[i]}.png'
+            old_graph_path = f'{ap_list[i]}.png'
             if os.path.exists(old_graph_path):
                 os.remove(old_graph_path)
             x = []
             y = []
-            with open(f'cities/static/graphs/{temp_c}/{air_pol_name[i]}.txt', 'r') as f:
+            with open(f'cities/static/graphs/{temp_c}/{temp}.txt', 'r') as f:
                 for line in f:
                     parts = line.split()
                     if len(parts) == 2:
@@ -113,9 +117,9 @@ try:
             plt.xlabel('Time')
             plt.ylabel(f'{air_pol_titles[i]} [μg/m$^3$]')
             plt.title(f'{air_pol_titles[i]} graph')
-            plt.savefig(f'cities/static/graphs/{temp_c}/{air_pol_name[i]}.png')
+            plt.savefig(f'cities/static/graphs/{temp_c}/{temp}.png')
             plt.close()
-            print(f'Graph of {air_pol_name[i]} in {c}')
+            print(f'Graph of {temp} in {c}')
         print('Graphs have been done creating')
         print(f'Weather info about city {c} has been added\n\n')
         id_ +=1
