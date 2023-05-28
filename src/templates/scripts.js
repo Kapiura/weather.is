@@ -1,3 +1,5 @@
+{% load static %}
+
 var horoscopeData = [
     {% for key in horoscope %}
 { sign: "{{key.sign}}", description: "{{key.description}}" },
@@ -53,3 +55,24 @@ document.addEventListener('DOMContentLoaded', function () {
     var phoneNumberParagraph = document.getElementById('phone-number-paragraph');
     phoneNumberParagraph.textContent = '+48 ' + generatePhoneNumber();
 });
+
+function updateAirPollution() {
+    var selectedValue = document.getElementById("myComboAir").value;
+    var selectedOption = document.getElementById("myComboAir").options[document.getElementById("myComboAir").selectedIndex].text.toLowerCase();
+    var selectedInfo = document.getElementById("selectedairinfo");
+    var pollutionGraph = document.getElementById("pollutionGraph");
+
+    if (selectedValue === "") {
+      selectedInfo.textContent = "...";
+      pollutionGraph.src = "";
+      return;
+    }
+
+    selectedInfo.textContent = selectedValue + " μg/m^3";
+
+    pollutionGraph.src = "{% static 'graphs/' %}" + "{{ name }}/" + selectedOption + ".png";
+  }
+
+
+
+

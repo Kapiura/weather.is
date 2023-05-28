@@ -1,52 +1,53 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-<h1>{{name_space}}</h1>
-<p>Data: {{city.date}}</p>
-<p>Temperature: {{city.temp}} °C</p>
-<p>Simple weather description: {{city.description_simple}}</p>
-<p>Extended weather description: {{city.description}}</p>
-<p>Air pollution: {{city.air_pol}}</p>
-<table>
-    <tr>
-        <th>CO</th>
-        <th>NH3</th>
-        <th>NO</th>
-        <th>NO2</th>
-        <th>O3</th>
-        <th>PM10</th>
-        <th>PM25</th>
-        <th>SO2</th>
-    </tr>
-    <tr>
-        <td>{{city.co}}</td>
-        <td>{{city.nh3}}</td>
-        <td>{{city.no}}</td>
-        <td>{{city.no2}}</td>
-        <td>{{city.o3}}</td>
-        <td>{{city.pm10}}</td>
-        <td>{{city.pm25}}</td>
-        <td>{{city.so2}}</td>
-    </tr>
-</table>
-<img src='https://openweathermap.org/img/wn/{{city.pic}}@2x.png'>
-<p>Wind speed: {{city.wind_speed}} <span class="fraction">m</span>/<span class="fraction">s</span></p>
+<div class="weatherDesc container">
+    <div class="row">
+        <div class="centerDiv weatherTab col-md-12">
+            <h1 style="float: left;padding-top: 0.55em;">{{name_space}}</h1>
+            <img style="float: right;" src='https://openweathermap.org/img/wn/{{city.pic}}@2x.png'>
+        </div>
+    </div>
+    <div class="row">
+        <div class="centerDiv weatherTab col-md-5">
+            <p>Simple: {{city.description_simple}}</p>
+            <p>Extended: {{city.description}}</p>
+            <p>Temperature: {{city.temp}} °C</p>
+        </div>
+        <div class="centerDiv weatherTab col-md-5">
+            <p>Clouds: {{city.clouds}}%</p>
+            <p>Humidity: {{city.humidity}}%</p>
+            <p>Wind speed: {{city.wind_speed}} <span class="fraction">m</span>/<span class="fraction">s</span></p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="centerDiv weatherTab col-md-12">
+            <p>Sunrise: {{sunrise}}</p>
+            <p>Sunset: {{sunset}}</p>
+            <p>Timezone: {{timezone}}</p>
+        </div>
+    </div>
+    <div class="centerDiv weatherTab row">
+        <p>Air pollution: {{city.air_pol}}</p>
+        <h3>Choose air pollution:</h3>
+        <select id="myComboAir" onload="updateAirPollution()" onchange="updateAirPollution()">
+            <option value="" selected>Choose</option>
+            <option value="{{city.co}}" selected>CO</option>
+            <option value="{{city.nh3}}">NH3</option>
+            <option value="{{city.no}}">NO</option>
+            <option value="{{city.no2}}">NO2</option>
+            <option value="{{city.o3}}">O3</option>
+            <option value="{{city.pm10}}">PM10</option>
+            <option value="{{city.pm25}}">PM25</option>
+            <option value="{{city.so2}}">SO2</option>
+        </select>
+
+        <p class="centerDiv weatherTab" id="selectedairinfo">...</p>
+    </div>
+
+    <img id="pollutionGraph" src="{% static 'graphs/' %}graph.png" alt="Pollution Graph">
+</div>
 
 
-<p>Clouds: {{city.clouds}}%</p>
-<p>Humidity: {{city.humidity}}%</p>
-<p>Sunrise: {{sunrise}}</p>
-<p>Sunset: {{sunset}}</p>
-<p>Timezone: {{timezone}}</p>
-
-
-<img src="{% static 'graphs/' %}{{ name }}/co.png" alt="co graph">
-<img src="{% static 'graphs/' %}{{ name }}/nh3.png" alt="nh3 graph">
-<img src="{% static 'graphs/' %}{{ name }}/no.png" alt=" no graph">
-<img src="{% static 'graphs/' %}{{ name }}/no2.png" alt="no2 graph">
-<img src="{% static 'graphs/' %}{{ name }}/o3.png" alt="o3 graph">
-<img src="{% static 'graphs/' %}{{ name }}/pm10.png" alt="pm10 graph">
-<img src="{% static 'graphs/' %}{{ name }}/pm25.png" alt="pm25 graph">
-<img src="{% static 'graphs/' %}{{ name }}/so2.png" alt="so2 graph">
 
 {% endblock %}
