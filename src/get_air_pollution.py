@@ -63,12 +63,18 @@ try:
         air_pol_com = []
         print('adding info about {}'.format(c))
         weather = Weather(c)
+        my_model = city()
+        
         data = weather.get_coord()
+        
         weather.lat = data['coord']['lat']
+        my_model.lat = weather.lat
+        
         weather.lon = data['coord']['lon']
+        my_model.lon = weather.lon
+        
         data = weather.get_info_from_coords()
 
-        my_model = city()
         my_model.city_id = id_
         my_model.description_simple = data['weather'][0]['main']
         my_model.description = data['weather'][0]['description']
@@ -97,6 +103,7 @@ try:
         ap_list = ['co','no','no2','o3','so2','pm2_5','pm10','nh3']
         my_model.save()
         temp_c = c.replace(' ', '_')
+        plt.rcParams['savefig.transparent'] = True
         for i in range(len(air_pol_com)):
             temp = ap_list[i].replace('_','')
             with open(f'cities/static/graphs/{temp_c}/{temp}.txt', "a") as f:
@@ -117,7 +124,7 @@ try:
             plt.xlabel('Time')
             plt.ylabel(f'{air_pol_titles[i]} [μg/m$^3$]')
             plt.title(f'{air_pol_titles[i]} graph')
-            plt.savefig(f'cities/static/graphs/{temp_c}/{temp}.png')
+            plt.savefig(f'cities/static/graphs/{temp_c}/{temp}.png',transparent=True)
             plt.close()
             print(f'Graph of {temp} in {c}')
         print('Graphs have been done creating')

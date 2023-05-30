@@ -3,6 +3,7 @@ from .models import cities, city
 from django.http import Http404
 from datetime import datetime
 import pytz
+import folium
 
 now = datetime.now(pytz.timezone('Europe/Warsaw')).strftime("%H")
 
@@ -35,7 +36,12 @@ def weather_view_detail(request,pk):
         city_.pic = city_.pic.replace("n","d")
     
 
+    m = folium.Map(location=[city_.lat, city_.lon], zoom_start=12)
+    folium.Marker([city_.lat, city_.lon], popup=city_name.name).add_to(m)
+    map_html = m._repr_html_()
+
     context = {
+        'map_html': map_html,
         'city': city_,
         'name_space': city_name.name,
         'name' : city_name_n,

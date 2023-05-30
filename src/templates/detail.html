@@ -30,9 +30,9 @@
     <div class="centerDiv weatherTab row">
         <p>Air pollution: {{city.air_pol}}</p>
         <h3>Choose air pollution:</h3>
-        <select id="myComboAir" onload="updateAirPollution()" onchange="updateAirPollution()">
+        <select value="graph.png" id="myComboAir" onload="updateAirPollution()" onchange="updateAirPollution()">
             <option value="" selected>Choose</option>
-            <option value="{{city.co}}" selected>CO</option>
+            <option value="{{city.co}}">CO</option>
             <option value="{{city.nh3}}">NH3</option>
             <option value="{{city.no}}">NO</option>
             <option value="{{city.no2}}">NO2</option>
@@ -45,9 +45,11 @@
         <p class="centerDiv weatherTab" id="selectedairinfo">...</p>
     </div>
 
-    <img id="pollutionGraph" src="{% static 'graphs/' %}graph.png" alt="Pollution Graph">
+    <img id="pollutionGraph" src="{% static 'graphs/' %}graph1.png" alt="Pollution Graph">
+    <div class="centerDiv weatherTab row">
+        {{ map_html|safe }}
+    </div>
 </div>
-
 
 
 {% endblock %}

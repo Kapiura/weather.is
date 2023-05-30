@@ -25,5 +25,6 @@ class city(models.Model):
     sunrise = models.IntegerField(default=0)
     sunset = models.IntegerField(default=0)
     timezone = models.IntegerField(default=0)
-    #s
     humidity = models.FloatField(default=0)
+    lat = models.FloatField(default=0)
+    lon = models.FloatField(default=0)

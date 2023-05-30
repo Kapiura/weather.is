@@ -64,7 +64,7 @@ function updateAirPollution() {
 
     if (selectedValue === "") {
       selectedInfo.textContent = "...";
-      pollutionGraph.src = "";
+      pollutionGraph.src = "{% static 'graphs/' %}graph1.png";
       return;
     }
 
