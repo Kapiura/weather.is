@@ -1,4 +1,4 @@
-# weather.is
+# What's the weather - django web app
 weather is a website that checks and displays info about air pollution in poland cities 
 
 
@@ -35,4 +35,13 @@ python3 manage.py runserver
 ```
 How it looks
 
-![alt text](https://github.com/Kapiura/weather.is/blob/5d6331ab04498cbae4fd97b240b0b4e897d868b2/readme_images/ss_gd_1.png)
+# Home page
+![home page](https://github.com/Kapiura/weather.is/blob/0f57101abbb3b300610db3b8c673e8dbd11062e5/readme_images/ss_main.png)
+
+# Weather page - all cities
+![weather page](https://github.com/Kapiura/weather.is/blob/0f57101abbb3b300610db3b8c673e8dbd11062e5/readme_images/ss_we.png)
+
+# Weather page - Gdansk
+![weather - Gdanks](https://github.com/Kapiura/weather.is/blob/0f57101abbb3b300610db3b8c673e8dbd11062e5/readme_images/ss_gd_1.png)
+![weather - Gdanks](https://github.com/Kapiura/weather.is/blob/0f57101abbb3b300610db3b8c673e8dbd11062e5/readme_images/ss_gd_ap.png)
+![weather - Gdanks](https://github.com/Kapiura/weather.is/blob/0f57101abbb3b300610db3b8c673e8dbd11062e5/readme_images/ss_gd_map.png)
