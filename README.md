@@ -33,3 +33,6 @@ Go to src and run django app
 cd src
 python3 manage.py runserver
 ```
+How it looks
+
+![alt text](https://github.com/Kapiura/weather.is/blob/5d6331ab04498cbae4fd97b240b0b4e897d868b2/readme_images/ss_gd_1.png)
