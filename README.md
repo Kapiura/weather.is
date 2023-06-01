@@ -42,6 +42,6 @@ How it looks
 ![weather page](https://github.com/Kapiura/weather.is/blob/0f57101abbb3b300610db3b8c673e8dbd11062e5/readme_images/ss_we.png)
 
 # Weather page - Gdansk
-![weather - Gdanks](https://github.com/Kapiura/weather.is/blob/0f57101abbb3b300610db3b8c673e8dbd11062e5/readme_images/ss_gd_1.png)
-![weather - Gdanks](https://github.com/Kapiura/weather.is/blob/0f57101abbb3b300610db3b8c673e8dbd11062e5/readme_images/ss_gd_ap.png)
+![weather - Gdanks](https://github.com/Kapiura/weather.is/blob/820963a44b8f43aa435b9eb4b467367197b63bbe/readme_images/ss_gd_1.png)
+![weather - Gdanks](https://github.com/Kapiura/weather.is/blob/820963a44b8f43aa435b9eb4b467367197b63bbe/readme_images/ss_gd_ap.png)
 ![weather - Gdanks](https://github.com/Kapiura/weather.is/blob/0f57101abbb3b300610db3b8c673e8dbd11062e5/readme_images/ss_gd_map.png)
