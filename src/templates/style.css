@@ -116,7 +116,18 @@ tr:nth-child(even) {
   bottom: auto;
   width: 100%;
 }
-#nvik
+#nvik, #nvik a
 {
-    background-color: #876445;
+    font-size: 1.5em;
+    background-color: #876445 !important;
+}
+#nvik img
+{
+    width: auto;
+    height: 2em;
+    padding-left: 1em;
+}
+#nvik div ul li a:hover
+{
+    color:rgb(255, 255, 255);
 }
