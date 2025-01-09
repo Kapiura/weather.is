@@ -19,7 +19,7 @@ current_date = '-'.join(current_date)
 ap_list = ['co','no','no2','o3','so2','pm2_5','pm10','nh3']
 air_pol_titles = ['Carbon Monoxide','Nitric Oxide','Nitrogen Dioxide','Ozone','Sulfur Dioxide','Particulate Matter 2.5','Particulate Matter 10','Ammonia']
 cities_ = ['Bialystok', 'Bydgoszcz', 'Gdansk', 'Gorzow Wielkopolski', 'Katowice', 'Kielce', 'Krakow', 'Lublin', 'Lodz', 'Olsztyn', 'Opole', 'Poznan', 'Rzeszow', 'Szczecin', 'Torun', 'Warsaw', 'Wroclaw', 'Zielona Gora']
-API_KEY = '7b7fe4dd87c83d143654327eaa81fdd8'
+API_KEY = 'xdd'
 air_num = {
     1:'Good',
     2:'Fair',
