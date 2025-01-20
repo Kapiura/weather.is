@@ -1,4 +1,5 @@
 # What's the weather - django web app
+django app - sprawdza pogode i wyswietla info na jej temat, wszytstko w celach edukacyjnych
 weather is a website that checks and displays info about air pollution in poland cities 
 
 
